@@ -1,15 +1,21 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   menuIcon,
   logoIcon,
   searchIcon,
-  voiceSearchIcon,
+  voiceSearch,
   plusIcon,
   notificationIcon,
 } from "../utils";
+import Sidebar from "./Sidebar";
 
 export default function Navbar() {
   const inputRef = useRef<HTMLInputElement>(null); // Specify type for better TypeScript support
+  const [isMenuOpen, setisMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setisMenuOpen((prev) => !prev);
+  };
 
   const handleFocus = () => {
     inputRef.current?.focus(); // Check if inputRef.current is defined before calling focus
@@ -19,7 +25,7 @@ export default function Navbar() {
     <header className="header">
       <div className="max-screen-width">
         {/* Menu Icon */}
-        <div>
+        <div className="relative" onClick={toggleMenu}>
           <img
             src={menuIcon}
             alt="Menu Icon"
@@ -27,15 +33,12 @@ export default function Navbar() {
             height={30}
             className="cursor-pointer"
           />
+          <Sidebar isOpen={isMenuOpen} onClose={toggleMenu} />
         </div>
 
         {/* Logo */}
         <a href="#">
-          <img
-            src={logoIcon}
-            alt="YouTube Logo"
-            className="w-24 h-auto"
-          />
+          <img src={logoIcon} alt="YouTube Logo" className="w-24 h-auto" />
         </a>
 
         {/* Search Bar */}
@@ -59,7 +62,7 @@ export default function Navbar() {
         {/* Voice Search */}
         <button className="bg-gray-700 p-2 rounded-full">
           <img
-            src={voiceSearchIcon}
+            src={voiceSearch}
             alt="Voice Search"
             className="cursor-pointer h-6 w-6"
           />
@@ -76,8 +79,8 @@ export default function Navbar() {
           <img
             src={notificationIcon}
             alt="Notifications"
-            width={24}
-            height={24}
+            width={30}
+            height={30}
             className="cursor-pointer"
           />
         </button>

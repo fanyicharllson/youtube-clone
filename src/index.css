@@ -10,15 +10,25 @@
     scroll-behavior: smooth;
     outline: none;
 }
+
+html,
 body {
+    margin: 0;
+    padding: 0;
     background-color: #000;
     min-height: 100vh;
+}
+
+img {
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 
 @layer utilities {
     /* global  utilities */
     .max-screen-width {
-        @apply max-w-screen-xl mx-auto flex items-center gap-4 px-4 py-2;
+        @apply max-w-screen-xl mx-auto flex items-center gap-4 px-4 max-md:py-2;
     }
     
     .flex-center {
@@ -30,7 +40,7 @@ body {
 
     /* Header utilities classes*/
     .header {
-        @apply bg-black fixed top-0 w-full z-10;
+        @apply bg-black fixed top-0 left-0 w-full z-10 h-16;;
     }
 
 }
